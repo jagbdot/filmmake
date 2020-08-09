@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Imagery | Anay Kachi Film</title>
+	<meta name="description" content="Demo for various image unrolling effects with Three.js-" />
+	<meta name="keywords" content="three.js, webgl, unroll, image, effect, rollout, website, web development" />
+	<meta name="author" content="Codrops" />
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="https://use.typekit.net/jsq0suq.css">
+	<link rel="stylesheet" href="https://use.typekit.net/cze1cgq.css">
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<script src="https://unpkg.com/scrollreveal"></script>
+	<script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+	<script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
+	<script>
+	document.documentElement.className = "js";
+	var supportsCssVars = function() { var e, t = document.createElement("style"); return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e };
+	supportsCssVars() || alert("Please view this in a modern browser that supports CSS Variables.");
+	</script>
+</head>
+
+<body class="loading">
+		<svg class="hidden">
+			<symbol id="icon-arrow" viewBox="0 0 24 24">
+				<title>arrow</title>
+				<polygon points="6.3,12.8 20.9,12.8 20.9,11.2 6.3,11.2 10.2,7.2 9,6 3.1,12 9,18 10.2,16.8 "/>
+			</symbol>
+			<symbol id="icon-drop" viewBox="0 0 24 24">
+				<title>drop</title>
+				<path d="M12,21c-3.6,0-6.6-3-6.6-6.6C5.4,11,10.8,4,11.4,3.2C11.6,3.1,11.8,3,12,3s0.4,0.1,0.6,0.3c0.6,0.8,6.1,7.8,6.1,11.2C18.6,18.1,15.6,21,12,21zM12,4.8c-1.8,2.4-5.2,7.4-5.2,9.6c0,2.9,2.3,5.2,5.2,5.2s5.2-2.3,5.2-5.2C17.2,12.2,13.8,7.3,12,4.8z"/><path d="M12,18.2c-0.4,0-0.7-0.3-0.7-0.7s0.3-0.7,0.7-0.7c1.3,0,2.4-1.1,2.4-2.4c0-0.4,0.3-0.7,0.7-0.7c0.4,0,0.7,0.3,0.7,0.7C15.8,16.5,14.1,18.2,12,18.2z"/>
+			</symbol>
+			<svg id="icon-github" viewBox="0 0 33 33">
+				<title>github</title>
+				<path d="M16.608.455C7.614.455.32 7.748.32 16.745c0 7.197 4.667 13.302 11.14 15.456.815.15 1.112-.353 1.112-.785 0-.386-.014-1.411-.022-2.77-4.531.984-5.487-2.184-5.487-2.184-.741-1.882-1.809-2.383-1.809-2.383-1.479-1.01.112-.99.112-.99 1.635.115 2.495 1.679 2.495 1.679 1.453 2.489 3.813 1.77 4.741 1.353.148-1.052.569-1.77 1.034-2.177-3.617-.411-7.42-1.809-7.42-8.051 0-1.778.635-3.233 1.677-4.371-.168-.412-.727-2.069.16-4.311 0 0 1.367-.438 4.479 1.67a15.602 15.602 0 0 1 4.078-.549 15.62 15.62 0 0 1 4.078.549c3.11-2.108 4.475-1.67 4.475-1.67.889 2.242.33 3.899.163 4.311C26.37 12.66 27 14.115 27 15.893c0 6.258-3.809 7.635-7.437 8.038.584.503 1.105 1.497 1.105 3.017 0 2.177-.02 3.934-.02 4.468 0 .436.294.943 1.12.784 6.468-2.159 11.131-8.26 11.131-15.455 0-8.997-7.294-16.29-16.291-16.29"></path>
+			</svg>
+			<symbol id="icon-caret" viewBox="0 0 24 13">
+				<title>caret</title>
+				<path d="M23.646.328a.842.842 0 0 0-1.19 0l-10.459 10.48L1.517.328a.842.842 0 0 0-1.189 1.19L11.382 12.57c.164.164.369.246.595.246.205 0 .43-.082.594-.246L23.625 1.518a.824.824 0 0 0 .02-1.19z"/>
+			</symbol>
+		</svg>
+	<main>
+			<div class="content content--fixed">
+				<header class="codrops-header">
+					<div class="codrops-links">
+						<a class="codrops-icon codrops-icon--prev" href="https://anaykachifilm.com/" title="Previous Demo"><svg class="icon icon--arrow"><use xlink:href="#icon-arrow"></use></svg></a>
+					</div>
+					<h1 class="codrops-header__title"></h1>
+				</header>
+				<p class="info"><a class="github" href="https://watch.anaykachifilm.com/" title="Watch the Trailer"><img src='img/camera.svg' class="icon cienema"></a></p>
+			</div>
+		<!-- begin scrollable -->
+		<div data-scroll>
+			<div class='fullpage'>
+				<img src="img/picture49-2.jpg" alt="Some image">
+			</div>
+			<header class="header">
+				<h3>Historic Context</h3>
+				<h1 class="header__title">Imagery</h1>
+				<div class="info">
+					<p class='intro-p'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non egestas sem. Donec elit risus, malesuada cursus lectus ut, aliquam auctor libero. Maecenas eu ante ex. Nulla facilisi. Nulla placerat mollis sapien ultricies rhoncus. Curabitur eleifend mattis porttitor. Phasellus sed ullamcorper nulla. Aliquam sollicitudin lorem sed rhoncus tempus. Ut faucibus ante eu dolor rutrum accumsan.</p>
+				</div>
+			</header>
+			<!-- begin section -->
+			<section class="section intro">
+				<div class="intro__wrap">
+					<div class="intro__background-image">
+					<!--<video class='some image' playsinline autoplay muted loop="controls">
+					    <source src="img/catching.webm" type="video/webm"  />
+					</video>-->
+					<img class='img-reveal' src="img/picture40.jpg" alt="Some image">
+						<!--<img src="img/picture2.jpg" alt="Some image">-->
+						<p class='poem'>
+							[...] Ausente! La mañana en que me vaya<br>
+							más lejos de lo lejos, al Misterio,<br>
+							como siguiendo inevitable raya,<br>
+							tus pies resbalarán al cementerio.
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+												<p class='poem'>
+							[...] Ausente! La mañana en que me vaya<br>
+							más lejos de lo lejos, al Misterio,<br>
+							como siguiendo inevitable raya,<br>
+							tus pies resbalarán al cementerio.
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+												<p class='poem'>
+							[...] Ausente! La mañana en que me vaya<br>
+							más lejos de lo lejos, al Misterio,<br>
+							como siguiendo inevitable raya,<br>
+							tus pies resbalarán al cementerio.
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+					</div>
+					<div class="intro__foreground-image">
+						<img src="img/picture3.jpg" class="js-image" alt="Some image">
+						<p class='photo-foot'>1. Salar de Maras, 2018. | 2. Pozas de Sal, 2018.</p>
+					</div>
+				</div>
+			</section>
+			<!-- end section -->
+			<!-- begin section -->
+			<section class="section dos">
+				<header class="header">
+				<h2>"A journey through the salt"</h2>
+				<div class="info">
+					<p class='intro-p'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non egestas sem. Donec elit risus, malesuada cursus lectus ut, aliquam auctor libero. Maecenas eu ante ex. Nulla facilisi. Nulla placerat mollis sapien ultricies rhoncus. Curabitur eleifend mattis porttitor. Phasellus sed ullamcorper nulla. Aliquam sollicitudin lorem sed rhoncus tempus. Ut faucibus ante eu dolor rutrum accumsan.</p>
+				</div>
+				</header>
+				<div class="dos__foreground">
+					<div class="meta">
+						<h3 class="meta__subtitle">– We are the first</h3>
+						<h2 class="meta__title">Working people</h2>
+					</div>
+					<div class="dos__foreground-image">
+						<img src="img/picture1.jpg" alt="Some image">
+					</div>
+				</div>
+				<div class="dos__background">
+					<div class="dos__background-image">
+						<img src="img/picture23.jpg" class="js-image" alt="Some image">
+						<p class='photo-foot'>1. Cocina de Marasal, 2018. | 2. Cocina de Marasal, 2018.</p>
+					</div>
+					<div class="dos__text">
+				
+					</div>
+				</div>
+			</section>
+			<!-- end section -->
+			<!-- begin tres -->
+			<section class="section tres">
+				<div class="tres__foreground">
+					<div class="tres__foreground-image">
+						<img src="img/picture5.jpg" class="js-image" alt="Some image">
+
+					</div>
+					<div class="meta">
+						<h3 class="meta__subtitle">– Following the right</h3>
+						<h2 class="meta__title">Traditional job days</h2>
+					</div>
+				</div>
+				<div class="tres__background">
+					<div class="tres__background-image">
+						<img src="img/picture27.jpg" alt="Some image">
+						<p class='photo-foot'>1. Cocina de Marasal, 2018. | 2. Cocina de Marasal, 2018.</p>
+					</div>
+					<div class="tres__text">
+						<p class='poem'>
+							[...] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+					</div>
+				</div>
+			</section>
+			<!-- end tres -->
+			<section class="section last">
+				<header class="header">
+				<h2>"This job was done by the Pre-Inca civilization"</h2>
+				<div class="info">
+					<p class='intro-p'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non egestas sem. Donec elit risus, malesuada cursus lectus ut, aliquam auctor libero. Maecenas eu ante ex. Nulla facilisi. Nulla placerat mollis sapien ultricies rhoncus. Curabitur eleifend mattis porttitor. Phasellus sed ullamcorper nulla. Aliquam sollicitudin lorem sed rhoncus tempus. Ut faucibus ante eu dolor rutrum accumsan.</p>
+				</div>
+				</header>
+				<div class="last__image">
+					<img src="img/picture28.jpg" alt="Some image">
+					<p class='photo-foot'>Cocina de Marasal, 2018.</p>
+				</div>
+			</section>
+			<!-- begin section cuatro -->
+			<!--<section class="section cuatro">
+				<header class="header">
+				<h2>"This job was done by the Pre-Inca civilization"</h2>
+				<div class="info">
+					<p class='intro-p'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non egestas sem. Donec elit risus, malesuada cursus lectus ut, aliquam auctor libero. Maecenas eu ante ex. Nulla facilisi. Nulla placerat mollis sapien ultricies rhoncus. Curabitur eleifend mattis porttitor. Phasellus sed ullamcorper nulla. Aliquam sollicitudin lorem sed rhoncus tempus. Ut faucibus ante eu dolor rutrum accumsan.</p>
+				</div>
+				</header>
+				<ul>
+					<li><img src="img/picture15.jpg" class="js-image" alt="Some image"></li>
+					<li><img src="img/picture16.jpg" class="js-image" alt="Some image"></li>
+						<p class='poem'>
+							[...] Ausente! La mañana en que me vaya<br>
+							más lejos de lo lejos, al Misterio,<br>
+							como siguiendo inevitable raya,<br>
+							tus pies resbalarán al cementerio.
+							<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>
+						</p>
+					<li><img src="img/picture22.jpg" class="js-image" alt="Some image"></li>
+					<li><img src="img/picture21.jpg" class="js-image" alt="Some image"></li>
+											<p class='poem'>
+							[...] Ausente! La mañana en que me vaya<br>
+							más lejos de lo lejos, al Misterio,<br>
+							como siguiendo inevitable raya,<br>
+							tus pies resbalarán al cementerio.
+							<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>
+						</p>
+				</ul>
+			</section>-->
+			<section class="section intro">
+				<div class="intro__wrap">
+					<div class="intro__background-image">
+					<!--<video class='some image' playsinline autoplay muted loop="controls">
+					    <source src="img/catching.webm" type="video/webm"  />
+					</video>-->
+					<img src="img/picture8.jpg" alt="Some image">
+						<!--<img src="img/picture2.jpg" alt="Some image">-->
+						<p class='poem'>
+							[...] Ausente! La mañana en que me vaya<br>
+							más lejos de lo lejos, al Misterio,<br>
+							como siguiendo inevitable raya,<br>
+							tus pies resbalarán al cementerio.
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+												<p class='poem'>
+							[...] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+												<p class='poem'>
+							[...] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+					</div>
+					<div class="intro__foreground-image">
+						<img src="img/picture16.jpg" class="js-image" alt="Some image">
+										<p class='photo-foot'>1. Salar de Maras, 2018. | 2. Pozas de Sal, 2018.</p>
+					</div>
+				</div>
+			</section>
+			<section class="section dos">
+				<header class="header">
+				<h2>"This job was done by the Pre-Inca civilization"</h2>
+				<div class="info">
+					<p class='intro-p'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non egestas sem. Donec elit risus, malesuada cursus lectus ut, aliquam auctor libero. Maecenas eu ante ex. Nulla facilisi. Nulla placerat mollis sapien ultricies rhoncus. Curabitur eleifend mattis porttitor. Phasellus sed ullamcorper nulla. Aliquam sollicitudin lorem sed rhoncus tempus. Ut faucibus ante eu dolor rutrum accumsan.</p>
+				</div>
+				</header>
+				<div class="dos__foreground">
+					<div class="meta">
+						<h3 class="meta__subtitle">– We are the first</h3>
+						<h2 class="meta__title">Working people</h2>
+					</div>
+					<div class="dos__foreground-image">
+						<img src="img/picture18.jpg" alt="Some image">
+					</div>
+				</div>
+				<div class="dos__background">
+					<div class="dos__background-image">
+						<img src="img/picture9.jpg" class="js-image" alt="Some image">
+						<p class='photo-foot'>1. Cocina de Marasal, 2018. | 2. Cocina de Marasal, 2018.</p>
+
+					</div>
+					<div class="dos__text">
+				
+					</div>
+				</div>
+			</section>
+			<section class="section tres">
+				<div class="tres__foreground">
+					<div class="tres__foreground-image">
+						<img src="img/picture14.jpg" class="js-image" alt="Some image">
+
+					</div>
+					<div class="meta">
+						<h3 class="meta__subtitle">– Following the right</h3>
+						<h2 class="meta__title">Traditional job days</h2>
+					</div>
+				</div>
+				<div class="tres__background">
+					<div class="tres__background-image">
+						<img src="img/picture36.jpg" alt="Some image">
+						<p class='photo-foot'>1. Cocina de Marasal, 2018. | 2. Cocina de Marasal, 2018.</p>
+					</div>
+					<div class="tres__text">
+						<p class='poem'>
+							[...] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+					</div>
+				</div>
+			</section>
+			<section class="section last">
+				<header class="header">
+				<h2>"This job was done by the Pre-Inca civilization"</h2>
+				<div class="info">
+					<p class='intro-p'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non egestas sem. Donec elit risus, malesuada cursus lectus ut, aliquam auctor libero. Maecenas eu ante ex. Nulla facilisi. Nulla placerat mollis sapien ultricies rhoncus. Curabitur eleifend mattis porttitor. Phasellus sed ullamcorper nulla. Aliquam sollicitudin lorem sed rhoncus tempus. Ut faucibus ante eu dolor rutrum accumsan.</p>
+				</div>
+				</header>
+				<div class="last__image">
+					<img src="img/picture38.jpg" alt="Some image">
+					<p class='photo-foot'>Cocina de Marasal, 2018.</p>
+				</div>
+			</section>
+			<section class="section intro">
+				<div class="intro__wrap">
+					<div class="intro__background-image">
+					<!--<video class='some image' playsinline autoplay muted loop="controls">
+					    <source src="img/catching.webm" type="video/webm"  />
+					</video>-->
+					<img src="img/picture49.jpg" alt="Some image">
+						<!--<img src="img/picture2.jpg" alt="Some image">-->
+						<p class='poem'>
+							[...] Ausente! La mañana en que me vaya<br>
+							más lejos de lo lejos, al Misterio,<br>
+							como siguiendo inevitable raya,<br>
+							tus pies resbalarán al cementerio.
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+												<p class='poem'>
+							[...] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+												<p class='poem'>
+							[...] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+					</div>
+					<div class="intro__foreground-image">
+						<img src="img/picture39.jpg" class="js-image" alt="Some image">
+						<p class='photo-foot'>1. Salar de Maras, 2018. | 2. Pozas de Sal, 2018.</p>
+					</div>
+				</div>
+			</section>
+			<section class="section dos">
+				<header class="header">
+				<h2>"A journey through the salt"</h2>
+				<div class="info">
+					<p class='intro-p'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non egestas sem. Donec elit risus, malesuada cursus lectus ut, aliquam auctor libero. Maecenas eu ante ex. Nulla facilisi. Nulla placerat mollis sapien ultricies rhoncus. Curabitur eleifend mattis porttitor. Phasellus sed ullamcorper nulla. Aliquam sollicitudin lorem sed rhoncus tempus. Ut faucibus ante eu dolor rutrum accumsan.</p>
+				</div>
+				</header>
+				<div class="dos__foreground">
+					<div class="meta">
+						<h3 class="meta__subtitle">– We are the first</h3>
+						<h2 class="meta__title">Working people</h2>
+					</div>
+					<div class="dos__foreground-image">
+						<img src="img/picture48.jpg" alt="Some image">
+					</div>
+				</div>
+				<div class="dos__background">
+					<div class="dos__background-image">
+						<img src="img/picture43.jpg" class="js-image" alt="Some image">
+						<p class='photo-foot'>1. Cocina de Marasal, 2018. | 2. Cocina de Marasal, 2018.</p>
+
+					</div>
+					<div class="dos__text">
+				
+					</div>
+				</div>
+			</section>
+			<section class="section tres">
+				<div class="tres__foreground">
+					<div class="tres__foreground-image">
+						<img src="img/picture46.jpg" class="js-image" alt="Some image">
+					</div>
+					<div class="meta">
+						<h3 class="meta__subtitle">– Following the right</h3>
+						<h2 class="meta__title">Traditional job days</h2>
+					</div>
+				</div>
+				<div class="tres__background">
+					<div class="tres__background-image">
+						<img src="img/picture44.jpg" alt="Some image">
+						<p class='photo-foot'>1. Cocina de Marasal, 2018. | 2. Cocina de Marasal, 2018.</p>
+					</div>
+					<div class="tres__text">
+						<p class='poem'>
+							[...] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+							<!--<span class='author'>César Vallejo</span>
+							<span class='reference'>Book from the forest</span>-->
+						</p>
+					</div>
+				</div>
+			</section>
+			<section class="section last">
+				<header class="header">
+				<h2>"This job was done by the Pre-Inca civilization"</h2>
+				<div class="info">
+					<p class='intro-p'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non egestas sem. Donec elit risus, malesuada cursus lectus ut, aliquam auctor libero. Maecenas eu ante ex. Nulla facilisi. Nulla placerat mollis sapien ultricies rhoncus. Curabitur eleifend mattis porttitor. Phasellus sed ullamcorper nulla. Aliquam sollicitudin lorem sed rhoncus tempus. Ut faucibus ante eu dolor rutrum accumsan.</p>
+				</div>
+				</header>
+				<div class="last__image">
+					<img src="img/picture45.jpg" alt="Some image">
+					<p class='photo-foot'>Cocina de Marasal, 2018.</p>
+				</div>
+			</section>
+			<!-- end section -->
+			<!-- begin section -->
+
+			<!-- end section -->
+
+			<section class="section intro">
+				<div class="intro__wrap">
+					<div class="intro__background-image">
+					<!--<video class='some image' playsinline autoplay muted loop="controls">
+					    <source src="img/catching.webm" type="video/webm"  />
+					</video>-->
+					<img src="img/picture53.jpg" alt="Some image">
+						<!--<img src="img/picture2.jpg" alt="Some image">-->
+						<p class='poem'>
+							[...] Ausente! La mañana en que me vaya<br>
+							más lejos de lo lejos, al Misterio,<br>
+							como siguiendo inevitable raya,<br>
+							tus pies resbalarán al cementerio.
+						</p>
+							<p class='poem'>
+							[...] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+						</p>
+						<p class='poem'>
+							[...] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+						</p>
+					</div>
+					<div class="intro__foreground-image">
+						<img src="img/picture50.jpg" class="js-image" alt="Some image">
+						<p class='photo-foot'>1. Salar de Maras, 2018. | 2. Pozas de Sal, 2018.</p>
+					</div>
+				</div>
+			</section>
+			<section class="section dos">
+				<header class="header">
+				<h2>"A journey through the salt"</h2>
+				<div class="info">
+					<p class='intro-p'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non egestas sem. Donec elit risus, malesuada cursus lectus ut, aliquam auctor libero. Maecenas eu ante ex. Nulla facilisi. Nulla placerat mollis sapien ultricies rhoncus. Curabitur eleifend mattis porttitor. Phasellus sed ullamcorper nulla. Aliquam sollicitudin lorem sed rhoncus tempus. Ut faucibus ante eu dolor rutrum accumsan.</p>
+				</div>
+				</header>
+				<div class="dos__foreground">
+					<div class="meta">
+						<h3 class="meta__subtitle">– We are the first</h3>
+						<h2 class="meta__title">Working people</h2>
+					</div>
+					<div class="dos__foreground-image">
+						<img src="img/picture54.jpg" alt="Some image">
+					</div>
+				</div>
+				<div class="dos__background">
+					<div class="dos__background-image">
+						<img src="img/picture26.jpg" class="js-image" alt="Some image">
+						<p class='photo-foot'>1. Cocina de Marasal, 2018. | 2. Cocina de Marasal, 2018.</p>
+					</div>
+					<div class="dos__text">
+				
+					</div>
+				</div>
+			</section>
+			<section class="section tres">
+				<div class="tres__foreground">
+					<div class="tres__foreground-image">
+						<img src="img/picture4.jpg" class="js-image" alt="Some image">
+					</div>
+					<div class="meta">
+						<h3 class="meta__subtitle">– Following the right</h3>
+						<h2 class="meta__title">Traditional job days</h2>
+					</div>
+				</div>
+				<div class="tres__background">
+					<div class="tres__background-image">
+						<img src="img/picture21.jpg" alt="Some image">
+						<p class='photo-foot'>1. Cocina de Marasal, 2018. | 2. Cocina de Marasal, 2018.</p>
+					</div>
+					<div class="tres__text">
+						<p class='poem'>
+							[...] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+						</p>
+
+					</div>
+				</div>
+			</section>
+			<section class="section last">
+				<header class="header">
+				<h2>"This job was done by the Pre-Inca civilization"</h2>
+				<div class="info">
+					<p class='intro-p'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non egestas sem. Donec elit risus, malesuada cursus lectus ut, aliquam auctor libero. Maecenas eu ante ex. Nulla facilisi. Nulla placerat mollis sapien ultricies rhoncus. Curabitur eleifend mattis porttitor. Phasellus sed ullamcorper nulla. Aliquam sollicitudin lorem sed rhoncus tempus. Ut faucibus ante eu dolor rutrum accumsan.</p>
+				</div>
+				</header>
+				<div class="last__image">
+					<img src="img/picture10.jpg" alt="Some image">
+					<p class='photo-foot'>Cocina de Marasal, 2018.</p>
+				</div>
+			</section>
+			<h4>Bibiography</h4>
+			<section class="half-1">
+						<p class='bibliography'>
+							[<a href="#">1.</a>] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+						</p>
+						<p class='bibliography'>
+							[<a href="#">2.</a>] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+						</p>
+						<p class='bibliography'>
+							[<a href="#">3.</a>] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+						</p>
+						<p class='bibliography'>
+							[<a href="#">3.</a>] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+						</p>
+			</section>
+			<section class="half-2">
+						<p class='bibliography'>
+							[<a href="#">1.</a>] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+						</p>
+						<p class='bibliography'>
+							[<a href="#">2.</a>] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+						</p>
+						<p class='bibliography'>
+							[<a href="#">3.</a>] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+						</p>
+						<p class='bibliography'>
+							[<a href="#">3.</a>] Vengo a verte pasar todos los días,<br>
+							vaporcito encantado siempre lejos…<br>
+							Tus ojos son dos rubios capitanes;<br>
+							tu labio es un brevísimo pañuelo<br>
+							rojo que ondea ¡en un adiós de sangre!
+						</p>
+			</section>
+		<!-- end scrollable -->
+	</main>
+	<div id="container"></div>
+	<script src="js/app.js"></script>
+		<script>
+			ScrollReveal().reveal('.fullpage', { delay: 900 });
+			ScrollReveal().reveal('.header__title', { delay: 900 });
+			ScrollReveal().reveal('.intro-p', { delay: 800, reset: true });
+			ScrollReveal().reveal('.header__title', { easing: 'ease-in-out' }, { delay: 800, reset: true });
+			ScrollReveal().reveal('.img-reveal', { delay: 800, reset: true }, { easing: 'ease-in-out' });
+			ScrollReveal().reveal('.poem', { delay: 800, reset: true }, { easing: 'ease-in-out' });
+		</script>
+</body>
+
+</html>
